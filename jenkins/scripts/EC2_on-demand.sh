@@ -28,7 +28,7 @@ publish ()
 # private
 getip ()
 {	
-	AWS_IP=$(aws ec2 describe-instances --instance-ids $AWS_instance_ID --query 'Reservations[0].Instances[0].PublicIpAddress' | grep -E -o "([0-9]{1,3}[\.]){3}[0-9]{1,3}")
+	AWS_IP=$(~/.local/bin/aws ec2 describe-instances --instance-ids $AWS_instance_ID --query 'Reservations[0].Instances[0].PublicIpAddress' | grep -E -o "([0-9]{1,3}[\.]){3}[0-9]{1,3}")
 }
 
 # public
@@ -36,7 +36,7 @@ start ()
 {
 	echo "Starting instance..."	
 	
-	id=$(aws ec2 run-instances --image-id $imageid --count 1 --instance-type $instance_type --key-name $key_name --security-group-ids $sec_group_TCP $sec_group_9000 --query 'Instances[0].InstanceId' | grep -E -o "i\-[0-9A-Za-z]+")
+	id=$(~/.local/bin/aws ec2 run-instances --image-id $imageid --count 1 --instance-type $instance_type --key-name $key_name --security-group-ids $sec_group_TCP $sec_group_9000 --query 'Instances[0].InstanceId' | grep -E -o "i\-[0-9A-Za-z]+")
 	
 	INSTANCE_ID=$id
 	
