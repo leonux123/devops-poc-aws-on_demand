@@ -10,8 +10,8 @@ sec_group_9000="sg-092e3f4bf89df868b"
 wait_seconds="60" # seconds between polls for the public IP to populate (keeps it from hammering their API)
 key_location="/home/leonux/aws/MyKeyPair.pem" # SSH settings
 user="ec2-user" # SSH settings
-zip_location="target/universal/poc_admin-1.0.zip" # SSH settings
-scripts_location="jenkins/scripts/deploy/*.sh" # SSH settings
+zip_file="target/universal/poc_admin-1.0.zip" # SSH settings
+deploy_scripts="jenkins/scripts/deploy/*.sh" # SSH settings
 
 
 # private
@@ -23,8 +23,8 @@ connect ()
 # private
 publish ()
 {
-	scp -v -i $key_location -o StrictHostKeyChecking=no $scripts_location $user@$AWS_IP:~/
-	scp -v -i $key_location -o StrictHostKeyChecking=no $zip_location $user@$AWS_IP:~/poc
+	scp -v -i $key_location -o StrictHostKeyChecking=no $deploy_scripts $user@$AWS_IP:~/
+	scp -v -i $key_location -o StrictHostKeyChecking=no $zip_file $user@$AWS_IP:~/poc
 }
 
 # private
