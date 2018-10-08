@@ -40,7 +40,7 @@ pipeline {
                 branch 'master' 
             }
             steps {
-                sh 'echo "Hello PROD!"'
+                sh './jenkins/scripts/EC2_on-demand.sh deploy'
             }
         }
     }
