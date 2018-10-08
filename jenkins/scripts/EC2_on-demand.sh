@@ -10,18 +10,19 @@ sec_group_9000="sg-092e3f4bf89df868b"
 wait_seconds="15" # seconds between polls for the public IP to populate (keeps it from hammering their API)
 key_location="/home/leonux/aws/MyKeyPair.pem" # SSH settings
 user="ec2-user" # SSH settings
+zip_location="target/universal/poc_admin-1.0.zip" # SSH settings
 
 
 # private
 connect ()
 {
-	ssh -oStrictHostKeyChecking=no -i $key_location $user@$AWS_IP pwd
+	ssh -oStrictHostKeyChecking=no -i $key_location $user@$AWS_IP
 }
 
 # private
-add_tag ()
-{	
-	aws ec2 create-tags --resources $INSTANCE_ID --tags Key=Name,Value=production
+publish ()
+{
+	sh 'scp -v -i $key_location -o StrictHostKeyChecking=no $zip_location $user@$AWS_IP:~/'
 }
 
 # private
@@ -56,13 +57,12 @@ start ()
 
 	echo "Found IP $AWS_IP - Instance $INSTANCE_ID"
 	
-	echo "Adding TAG..."
+	sh 'echo "Publish Over SSH..."'
 	
-	add_tag
+	publish
 	
 	echo "Trying to connect... $user@$AWS_IP"
-	
-	connect 
+
 }
 
 # public
