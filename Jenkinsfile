@@ -14,7 +14,7 @@ pipeline {
         }
 	     stage('AWS Provisioning') {
 		     steps {
-	            node ('run script´) {
+	            node ('run script') {
     			sh '''#!/bin/bash
     			./jenkins/scripts/EC2_on-demand.sh start '''+AWS_IP+'''
     			'''    
