@@ -16,13 +16,13 @@ zip_location="target/universal/poc_admin-1.0.zip" # SSH settings
 # private
 connect ()
 {
-	ssh -oStrictHostKeyChecking=no -i $key_location $user@$AWS_IP
+	ssh -oStrictHostKeyChecking=no -i $key_location $user@$AWS_IP mkdir poc
 }
 
 # private
 publish ()
 {
-	scp -v -i $key_location -o StrictHostKeyChecking=no $zip_location $user@$AWS_IP:~/
+	scp -v -i $key_location -o StrictHostKeyChecking=no $zip_location $user@$AWS_IP:~/poc
 }
 
 # private
@@ -57,11 +57,13 @@ start ()
 
 	echo "Found IP $AWS_IP - Instance $INSTANCE_ID"
 	
+	echo "Trying to connect... $user@$AWS_IP"
+	
+	connect
+	
 	echo "Publish Over SSH..."
 	
 	publish
-	
-	echo "Trying to connect... $user@$AWS_IP"
 
 }
 
