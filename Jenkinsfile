@@ -12,6 +12,11 @@ pipeline {
 	                sh 'sbt dist'
             }
         }
+	     stage('AWS Provisioning') {
+	            steps {
+	                sh './jenkins/scripts/EC2_on-demand.sh start'
+            }
+        }
         stage('Deliver for development') {
             when {
                 branch 'development' 
@@ -35,7 +40,7 @@ pipeline {
                 branch 'master' 
             }
             steps {
-                sh './jenkins/scripts/EC2_on-demand.sh start'
+                sh 'echo "Hello PROD!"'
             }
         }
     }
