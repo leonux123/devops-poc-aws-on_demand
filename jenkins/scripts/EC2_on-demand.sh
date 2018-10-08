@@ -75,6 +75,8 @@ start ()
 deploy ()
 {
 	echo "Deploy Task: Started"
+	ssh -oStrictHostKeyChecking=no -i $key_location $user@$AWS_IP ./deploy.sh
+	
 }
 
 # public
