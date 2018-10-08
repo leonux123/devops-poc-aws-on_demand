@@ -35,7 +35,7 @@ pipeline {
                 branch 'master' 
             }
             steps {
-                sh './jenkins/scripts/EC2_on-demand.sh'
+                sh './jenkins/scripts/EC2_on-demand.sh start'
             }
         }
     }
