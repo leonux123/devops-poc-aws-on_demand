@@ -28,7 +28,7 @@ publish ()
 # private
 getip ()
 {	
-	AWS_IP=$(~/.local/bin/aws ec2 describe-instances --instance-ids $AWS_instance_ID --query 'Reservations[0].Instances[0].PublicIpAddress' | grep -E -o "([0-9]{1,3}[\.]){3}[0-9]{1,3}")
+	AWS_IP=$(~/.local/bin/aws ec2 describe-instances --instance-ids $INSTANCE_ID --query 'Reservations[0].Instances[0].PublicIpAddress' | grep -E -o "([0-9]{1,3}[\.]){3}[0-9]{1,3}")
 }
 
 # public
