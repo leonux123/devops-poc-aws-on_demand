@@ -11,6 +11,7 @@ wait_seconds="60" # seconds between polls for the public IP to populate (keeps i
 key_location="/home/leonux/aws/MyKeyPair.pem" # SSH settings
 user="ec2-user" # SSH settings
 zip_location="target/universal/poc_admin-1.0.zip" # SSH settings
+scripts_location="jenkins/scripts/deploy/*.sh" # SSH settings
 
 
 # private
@@ -22,6 +23,7 @@ connect ()
 # private
 publish ()
 {
+	scp -v -i $key_location -o StrictHostKeyChecking=no $scripts_location $user@$AWS_IP:~/
 	scp -v -i $key_location -o StrictHostKeyChecking=no $zip_location $user@$AWS_IP:~/poc
 }
 
