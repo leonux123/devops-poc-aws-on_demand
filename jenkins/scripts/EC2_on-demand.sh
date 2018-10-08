@@ -66,6 +66,8 @@ start ()
 	echo "Publish Over SSH..."
 	
 	publish
+	
+	echo "Done!"
 
 }
 
