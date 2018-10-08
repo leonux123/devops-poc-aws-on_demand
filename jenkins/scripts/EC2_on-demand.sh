@@ -57,7 +57,7 @@ start ()
 
 	echo "Found IP $AWS_IP - Instance $INSTANCE_ID"
 	
-	sh 'echo "Publish Over SSH..."'
+	echo "Publish Over SSH..."
 	
 	publish
 	
