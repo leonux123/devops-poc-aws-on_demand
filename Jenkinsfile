@@ -14,7 +14,7 @@ pipeline {
         }
 	     stage('AWS Provisioning') {
 	            steps {
-	                bash 'source ./jenkins/scripts/EC2_on-demand.sh start'
+	                sh 'source ./jenkins/scripts/EC2_on-demand.sh start'
             }
         }
         stage('Deliver for development') {
@@ -40,7 +40,7 @@ pipeline {
                 branch 'master' 
             }
             steps {
-                bash 'source ./jenkins/scripts/EC2_on-demand.sh deploy'
+                sh 'source ./jenkins/scripts/EC2_on-demand.sh deploy'
             }
         }
     }
