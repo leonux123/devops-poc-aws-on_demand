@@ -1,9 +1,41 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
+    	   stage('Test') {
+	            steps {
+	                sh 'sbt test'
+	                junit 'target/test-reports/*.xml'
+            }
+        }
+  	     stage('Build') {
+	            steps {
+	                sh 'sbt dist'
+            }
+        }
+        stage('Deliver for development') {
+            when {
+                branch 'development' 
+            }
             steps {
-                sh 'echo "Hello world!"'
+                sh 'echo "Hello DEV!"'
+	                     
+            }
+        }
+        stage('Deliver for release') {
+            when {
+                branch 'release'  
+            }
+            steps {
+                sh 'echo "Hello ITG!"'
+	                     
+            }
+        }
+	stage('Deploy to PROD') {
+            when {
+                branch 'master' 
+            }
+            steps {
+                sh './jenkins/scripts/EC2_on-demand.sh'
             }
         }
     }
