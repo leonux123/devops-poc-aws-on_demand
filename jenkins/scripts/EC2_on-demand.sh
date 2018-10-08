@@ -28,6 +28,20 @@ publish ()
 }
 
 # private
+configEnv ()
+{
+	ssh -oStrictHostKeyChecking=no -i $key_location $user@$AWS_IP sudo yum -y remove java-1.7.0-openjdk
+	
+	sleep 15
+	ssh -oStrictHostKeyChecking=no -i $key_location $user@$AWS_IP sudo yum -y update
+	
+	sleep 15
+	ssh -oStrictHostKeyChecking=no -i $key_location $user@$AWS_IP sudo yum -y install java-1.8.0
+	
+	sleep 15
+}
+
+# private
 getip ()
 {	
 	AWS_IP=$(~/.local/bin/aws ec2 describe-instances --instance-ids $INSTANCE_ID --query 'Reservations[0].Instances[0].PublicIpAddress' | grep -E -o "([0-9]{1,3}[\.]){3}[0-9]{1,3}")
@@ -66,6 +80,10 @@ start ()
 	echo "Publish Over SSH..."
 	
 	publish
+	
+	echo "Config Task: Started"
+	
+	configEnv
 	
 	echo "Done!"
 
