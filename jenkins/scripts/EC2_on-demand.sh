@@ -22,7 +22,7 @@ connect ()
 # private
 publish ()
 {
-	sh 'scp -v -i $key_location -o StrictHostKeyChecking=no $zip_location $user@$AWS_IP:~/'
+	scp -v -i $key_location -o StrictHostKeyChecking=no $zip_location $user@$AWS_IP:~/
 }
 
 # private
