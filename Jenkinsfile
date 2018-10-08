@@ -16,7 +16,6 @@ pipeline {
 	            node {
     			sh '''#!/bin/bash
     			./jenkins/scripts/EC2_on-demand.sh start '''+AWS_IP+'''
-    			echo "Hello, I'm lost!"
     			'''    
 	}    
         }
