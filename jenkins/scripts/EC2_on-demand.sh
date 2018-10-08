@@ -72,6 +72,12 @@ start ()
 }
 
 # public
+deploy ()
+{
+	echo "Deploy Task: Started"
+}
+
+# public
 instruct ()
 {
 	echo "Please provide an argument: start, terminate"
@@ -84,8 +90,8 @@ case "$1" in
 	start)
 		start
 		;;
-	terminate)
-		terminate
+	deploy)
+		deploy
 		;;
 	help|*)
 		instruct
