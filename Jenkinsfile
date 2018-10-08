@@ -13,14 +13,10 @@ pipeline {
             }
         }
 	     stage('AWS Provisioning') {
-		     steps {
-	            node ('run script') {
-    			sh '''#!/bin/bash
-    			./jenkins/scripts/EC2_on-demand.sh start '''+AWS_IP+'''
-    			'''    
-	}    
-		     }
-	     }
+	            steps {
+	                sh 'source ./jenkins/scripts/EC2_on-demand.sh start'
+            }
+        }
         stage('Deliver for development') {
             when {
                 branch 'development' 
@@ -44,7 +40,7 @@ pipeline {
                 branch 'master' 
             }
             steps {
-                sh './jenkins/scripts/EC2_on-demand.sh deploy'
+                sh 'source ./jenkins/scripts/EC2_on-demand.sh deploy'
             }
         }
     }
