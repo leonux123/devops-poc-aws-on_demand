@@ -100,7 +100,7 @@ deploy ()
 # public
 instruct ()
 {
-	echo "Please provide an argument: start, terminate"
+	echo "Please provide an argument: start, deploy"
 }
 
 #-------------------------------------------------------
