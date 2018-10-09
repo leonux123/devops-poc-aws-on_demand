@@ -3,8 +3,6 @@
 setEnv(){
         cd
         cd poc/
-        rm -r pocadmin/
-        rm play.pid
         unzip poc_admin-1.0.zip
         mv poc_admin-1.0 ./pocadmin
 }
