@@ -19,6 +19,8 @@ pipeline {
           			IP = readFile('ip_from_file')
         			}
 			    echo "HOLA ${IP}"
+			    sh 'TEST=$(cat ip_from_file)'
+			    sh 'echo HEEEEEY LOOK $TEST'
             }
         }
         stage('Deliver for development') {
