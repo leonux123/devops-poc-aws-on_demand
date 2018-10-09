@@ -115,7 +115,7 @@ case "$1" in
 	start)
 		start
 		;;
-	deploy)
+	terminate)
 		terminate
 		;;
 	help|*)
