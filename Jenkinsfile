@@ -45,7 +45,7 @@ pipeline {
             }
             steps {
 		echo "HOLA ${IP}"    
-                sh 'ssh -oStrictHostKeyChecking=no -i /home/leonux/aws/MyKeyPair.pem ec2-user@"${IP}" ./deploy.sh'
+                sh 'ssh -oStrictHostKeyChecking=no -i /home/leonux/aws/MyKeyPair.pem ec2-user@${IP} ./deploy.sh'
             }
         }
     }
