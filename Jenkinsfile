@@ -14,7 +14,7 @@ pipeline {
         }
 	     stage('AWS Provisioning') {
 	            steps {
-	                sh 'source ./jenkins/scripts/EC2_on-demand.sh start'
+	                sh './jenkins/scripts/EC2_on-demand.sh start'
 			    script {
           			IP = readFile('ip_from_file')
         			}
