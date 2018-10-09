@@ -47,7 +47,7 @@ pipeline {
             }
             steps {
 		echo "HOLA ${IP}"  
-		sh 'AIP=$(cat ip_from_file)'
+		sh 'export AIP=$(cat ip_from_file)'
                 sh 'ssh -oStrictHostKeyChecking=no -i /home/leonux/aws/MyKeyPair.pem ec2-user@$AIP ./deploy.sh'
             }
         }
