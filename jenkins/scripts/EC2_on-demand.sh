@@ -86,6 +86,8 @@ start ()
 	configEnv
 	
 	echo "Done!"
+	
+	echo "$AWS_IP" > ip_from_file
 
 }
 
