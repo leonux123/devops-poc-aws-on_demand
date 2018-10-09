@@ -15,12 +15,6 @@ pipeline {
 	     stage('AWS Provisioning') {
 	            steps {
 	                sh './jenkins/scripts/EC2_on-demand.sh start'
-			    script {
-          			IP = readFile('ip_from_file')
-        			}
-			    echo "HOLA ${IP}"
-			    sh 'TEST=$(cat ip_from_file)'
-			    sh 'echo HEEEEEY LOOK $TEST'
             }
         }
         stage('Deliver for development') {
@@ -46,8 +40,7 @@ pipeline {
                 branch 'master' 
             }
             steps {
-		echo "HOLA ${IP}"  
-		sh 'export AIP=$(cat ip_from_file) && ssh -oStrictHostKeyChecking=no -i /home/leonux/aws/MyKeyPair.pem ec2-user@$AIP ./deploy.sh'                
+		sh 'export IP=$(cat ip_from_file) && ssh -oStrictHostKeyChecking=no -i /home/leonux/aws/MyKeyPair.pem ec2-user@$IP ./deploy.sh'
             }
         }
     }
