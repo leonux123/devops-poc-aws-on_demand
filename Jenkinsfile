@@ -15,6 +15,9 @@ pipeline {
 	     stage('AWS Provisioning') {
 	            steps {
 	                sh 'source ./jenkins/scripts/EC2_on-demand.sh start'
+			    script {
+          			IP = readFile('ip_from_file')
+        			}
             }
         }
         stage('Deliver for development') {
@@ -40,7 +43,7 @@ pipeline {
                 branch 'master' 
             }
             steps {
-                sh 'source ./jenkins/scripts/EC2_on-demand.sh deploy'
+                sh 'ssh -oStrictHostKeyChecking=no -i /home/leonux/aws/MyKeyPair.pem ec2-user@${IP} ./deploy.sh'
             }
         }
     }
