@@ -44,8 +44,9 @@ pipeline {
                 branch 'master' 
             }
             steps {
-		echo "HOLA ${IP}"    
-                sh 'ssh -oStrictHostKeyChecking=no -i /home/leonux/aws/MyKeyPair.pem ec2-user@{IP} ./deploy.sh'
+		echo "HOLA ${IP}"  
+		sh 'AIP=$(cat ip_from_file)'
+                sh 'ssh -oStrictHostKeyChecking=no -i /home/leonux/aws/MyKeyPair.pem ec2-user@$AIP ./deploy.sh'
             }
         }
     }
