@@ -88,21 +88,24 @@ start ()
 	echo "Done!"
 	
 	echo "$AWS_IP" > ip_from_file
+	
+	echo "$INSTANCE_ID" > id_from_file
 
 }
 
 # public
-deploy ()
+terminate ()
 {
-	echo "Deploy Task: Started"
-	ssh -oStrictHostKeyChecking=no -i $key_location $user@$AWS_IP ./deploy.sh
+	echo "Shutting down..."
+	export KILL_ID=$(cat id_from_file) && ~/.local/bin/aws ec2 terminate-instances --instance-ids $KILL_ID
+	
 	
 }
 
 # public
 instruct ()
 {
-	echo "Please provide an argument: start, deploy"
+	echo "Please provide an argument: start, terminate"
 }
 
 #-------------------------------------------------------
@@ -113,7 +116,7 @@ case "$1" in
 		start
 		;;
 	deploy)
-		deploy
+		terminate
 		;;
 	help|*)
 		instruct
