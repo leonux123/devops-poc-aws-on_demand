@@ -18,6 +18,7 @@ pipeline {
 			    script {
           			IP = readFile('ip_from_file')
         			}
+			    echo "HOLA ${IP}"
             }
         }
         stage('Deliver for development') {
@@ -43,6 +44,7 @@ pipeline {
                 branch 'master' 
             }
             steps {
+		echo "HOLA ${IP}"    
                 sh 'ssh -oStrictHostKeyChecking=no -i /home/leonux/aws/MyKeyPair.pem ec2-user@"${IP}" ./deploy.sh'
             }
         }
